@@ -1,14 +1,14 @@
 import "./App.css";
-import { Button } from "@/components/ui/button";
+
 import { ThemeProvider } from "./components/theme-provider";
-import { ModeToggle } from "./components/mode-toggle";
+
+import Layout from "@/components/Layout";
 
 function App() {
   return (
     <>
       <ThemeProvider>
-        <Button className="bg-primary">Click here</Button>
-        <ModeToggle />
+        <Layout />
       </ThemeProvider>
     </>
   );
