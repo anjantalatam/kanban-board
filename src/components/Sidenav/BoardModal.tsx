@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TBoard, useKanbanStore } from "@/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -49,9 +49,12 @@ function BoardModal({
   const [open, setOpen] = useState(false);
   const { createNewBoard, updateBoard, deleteBoard } = useKanbanStore();
 
+  useEffect(() => {
+    setName(currentBoard?.name ?? "");
+  }, [currentBoard?.name]);
+
   const handleBoardSubmit = (customAction?: EBoardAction) => {
     const boardAction = customAction ?? action;
-    console.log("here-0");
 
     switch (boardAction) {
       case EBoardAction.Create:

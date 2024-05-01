@@ -2,7 +2,6 @@ import { TTask } from "@/store";
 import TaskModal, { ETaskAction } from "./Sidenav/TaskModal";
 
 function TasksRenderer({ tasks }: { tasks: TTask[] }) {
-  console.log(tasks, "ts");
   if (tasks == null) {
     return null;
   }

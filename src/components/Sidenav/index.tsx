@@ -8,7 +8,6 @@ import { Button } from "../ui/button";
 
 function Sidenav() {
   const { boards, updateActiveBoardId, activeBoardId } = useKanbanStore();
-  console.log(activeBoardId, "activeBoardId");
 
   return (
     <div className="h-screen bg-secondary text-secondary-foreground w-[15rem] flex flex-col shadow-right">
@@ -22,7 +21,6 @@ function Sidenav() {
 
         <div className="flex flex-col gap-2 mb-2">
           {boards.map((board) => {
-            console.log(board.id, "board.id");
             const isActive = activeBoardId == board.id;
             return (
               <div

@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TTask, useKanbanStore } from "@/store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -70,8 +70,17 @@ function TaskModal({ action, modalTrigger, task, title }: ITaskModal) {
   const { activeBoardId, createNewTask, updateTask, deleteTask } =
     useKanbanStore();
 
+  useEffect(() => {
+    setName(task?.name ?? "");
+    setStatus(task?.status ?? "");
+  }, [task]);
+
+  const resetState = () => {
+    setName("");
+    setStatus("");
+  };
+
   const handleTaskSubmit = (customAction?: ETaskAction) => {
-    setOpen(false);
     const taskAction = customAction ?? action;
 
     switch (taskAction) {
@@ -98,7 +107,10 @@ function TaskModal({ action, modalTrigger, task, title }: ITaskModal) {
         if (task && activeBoardId) {
           deleteTask(activeBoardId, task.id);
         }
+        break;
     }
+    resetState();
+    setOpen(false);
   };
 
   const getTaskAction = (action: ETaskAction) => {
@@ -112,7 +124,14 @@ function TaskModal({ action, modalTrigger, task, title }: ITaskModal) {
   };
 
   return (
-    <Dialog open={open} onOpenChange={(state) => setOpen(state)}>
+    <Dialog
+      open={open}
+      onOpenChange={(state) => {
+        if (!state) {
+          resetState();
+        }
+        setOpen(state);
+      }}>
       <DialogTrigger asChild>{modalTrigger}</DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
