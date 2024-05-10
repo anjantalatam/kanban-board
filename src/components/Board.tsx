@@ -38,9 +38,6 @@ function Board() {
   const board = getActiveBoard(store);
   const tasksByStatus = board?.tasks ? getTasksByStatus(board?.tasks) : {};
 
-  console.log(tasksByStatus, "tasksByStatus");
-  console.log(board);
-
   return (
     <div className="flex-1 flex gap-10 py-4 pl-8">
       {boardStatuses.map(({ value: status, statusColor }) => {
